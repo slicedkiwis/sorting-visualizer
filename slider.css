@@ -1,0 +1,57 @@
+#output {
+  color: white;
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+}
+#sliderContainer {
+  margin: auto;
+  width: 80%;
+  position: block;
+  height: 50px;
+}
+.outputDiv {
+  display: inline;
+}
+.sliderDiv {
+  position: inline;
+  width: 50%;
+}
+.fpsForm {
+  position: inline;
+  float: right;
+}
+.sliderForm {
+  width: 50%;
+}
+.sliderDiv {
+  float: left;
+}
+.slider {
+  float: left;
+  -webkit-appearance: none;
+  appearance: none;
+  background: grey;
+  outline: node;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+.slider:hover {
+  opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20%;
+  height: 30px;
+  background: rgb(133, 44, 133); 
+  cursor: pointer; 
+}
+
+.slider::-moz-range-thumb {
+  width: 20%;
+  height: 30%;
+  background: rgb(133, 44, 133);
+  cursor: pointer;
+}

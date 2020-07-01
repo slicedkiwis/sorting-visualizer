@@ -1,0 +1,26 @@
+.generationButtons
+{
+    margin:auto ;
+    position: block;  
+    width: 80%;
+    left:50%;
+}
+#bars
+{
+  background-color: #9297C4;
+  color: white;
+  font-size: large ;
+  border: none;
+  position: inline;
+  width: 35%;
+}
+#randomize
+{
+  float: right;
+  background-color: #9297C4;
+  color: white;
+  font-size: large ;
+  border: none;
+  position: inline;
+  width: 39%;
+}

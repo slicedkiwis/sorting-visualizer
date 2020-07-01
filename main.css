@@ -1,0 +1,13 @@
+body
+{
+  background-color: rgb(44, 46, 51);
+}
+#myCanvas
+{
+    position: relative;
+    left:10%;
+    width:80%;
+    background-color: rgb(133, 44, 133);
+    border: 2px solid black;
+    float:none;
+}
