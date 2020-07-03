@@ -27,21 +27,20 @@ function generateBars() {
       arrayOfBars[i - 1].x + barWidth + barWidthApart,
       canvas.height,
       barWidth,
-      Math.floor(Math.random() * canvas.height - 10) + canvas.height * 0.05,
+      Math.floor(
+        Math.floor(Math.random() * canvas.height - 10) + canvas.height * 0.05
+      ),
       barColor
     );
   }
 }
-async   function render() {
-    context.clearRect(0, 0, canvas.width, canvas.height); //clears screen for redraw
-    for (let i = 0; i < arrayOfBars.length; i++) {
-      arrayOfBars[i].draw(context);
-  } 
-  setTimeout( 
-    function()
-    {
-      window.requestAnimationFrame(render)
-    },1000/60
-    );
+async function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height); //clears screen for redraw
+  for (let i = 0; i < arrayOfBars.length; i++) {
+    arrayOfBars[i].draw(context);
+  }
+  setTimeout(function () {
+    window.requestAnimationFrame(render);
+  }, 1000 / 60);
 }
 render();

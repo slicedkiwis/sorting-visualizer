@@ -2,7 +2,7 @@
 async function swap(array, l, r) {
   array[l].color = pivotColor;
   array[r].color = pivotColor;
-  await sleep (4);
+  await sleep(4);
   let temp = array[l].x;
   array[l].x = array[r].x;
   array[r].x = temp;
@@ -21,11 +21,11 @@ async function quickSort(left, right) {
       quickSort(left, pivot - 1),
       quickSort(pivot + 1, right),
     ]);
-    await sleep(animationMergeSpeed/2);
+    await sleep(animationMergeSpeed / 2);
   } else return;
 }
 async function partition(array, left, right) {
-  // checks if the array is already sorted (if its already sorted and we call quicksort it would take ( O(n^2) time)
+  // checks if the array is already swapped (if its already swapped and we call quicksort it would take ( O(n^2) time)
   let i = 0;
   for (i = 1; i < array.length; i++) {
     if (array[i].height < array[i - 1].height) break;
@@ -101,7 +101,6 @@ async function merge(left, mid, right) {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-// bubble sort algorithm
 async function bubbleSort() {
   let size = arrayOfBars.length;
   for (let outer = 0; outer < size; outer++) {
@@ -147,29 +146,76 @@ async function insertionSort() {
   }
 }
 async function selectionSort() {
-  let outer , inner , minimumIndex;  
-  for(outer = 0 ; outer < arrayOfBars.length - 1; outer++)
-  {
-    minimumIndex = outer ; 
+  let outer, inner, minimumIndex;
+  for (outer = 0; outer < arrayOfBars.length - 1; outer++) {
+    minimumIndex = outer;
     arrayOfBars[minimumIndex].color = pivotColor;
     arrayOfBars[outer].color = tertiaryColor;
     await sleep(animationMergeSpeed);
-    for(inner = outer + 1; inner < arrayOfBars.length;inner++)
-    {
+    for (inner = outer + 1; inner < arrayOfBars.length; inner++) {
       arrayOfBars[inner].color = secondaryColor;
       await sleep(3);
-      if(arrayOfBars[inner].height < arrayOfBars[minimumIndex ].height)
-      {
-       minimumIndex = inner; 
-       for(let k = 0 ; k < arrayOfBars.length;k++)
-       {
-         if(k != outer && k != minimumIndex)
-         {
-          arrayOfBars[k].color = barColor;
-         }
-       }
+      if (arrayOfBars[inner].height < arrayOfBars[minimumIndex].height) {
+        minimumIndex = inner;
+        for (let k = 0; k < arrayOfBars.length; k++) {
+          if (k != outer && k != minimumIndex) {
+            arrayOfBars[k].color = barColor;
+          }
+        }
       }
     }
-      swap(arrayOfBars,minimumIndex,outer);
+    swap(arrayOfBars, minimumIndex, outer);
   }
+}
+async function cocktailSort() {
+  let swapped = true;
+  let start = 0,
+    end = arrayOfBars.length - 1;
+  while (swapped) {
+    swapped = false;
+    await sleep(animationMergeSpeed);
+    for (let i = start; i < end; ++i) {
+      await sleep(animationMergeSpeed);
+      if (arrayOfBars[i].height > arrayOfBars[i + 1].height) {
+        swap(arrayOfBars, i, i + 1);
+        swapped = true;
+      }
+    }
+    if (!swapped) break;
+    for (let i = end - 1; i >= start; --i) {
+      await sleep(animationMergeSpeed);
+      if (arrayOfBars[i].height > arrayOfBars[i + 1].height) {
+        swap(arrayOfBars, i, i + 1);
+        swapped = true;
+      }
+    }
+  }
+}
+async function heapify(array, n, i) {
+  let largest = i;
+  let l = 2 * i + 1;
+  let r = 2 * i + 2;
+
+  if (l < n && arrayOfBars[l].height > arrayOfBars[largest].height) largest = l;
+  if (r < n && arrayOfBars[r].height > arrayOfBars[largest].height) largest = r;
+  if (largest != i) {
+    await swap(arrayOfBars, i, largest);
+    await sleep(animationMergeSpeed);
+    await heapify(arrayOfBars, n, largest);
+  }
+}
+async function heapSort() {
+  let n = arrayOfBars.length;
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
+    await heapify(arrayOfBars, n, i);
+  for (let i = n - 1; i > 0; i--) {
+    await swap(arrayOfBars, 0, i);
+    await sleep(animationMergeSpeed);
+    await heapify(arrayOfBars, i, 0);
+  }
+}
+//utility funcion to check if the array is in sorted order
+function printHeight() {
+  for (let i = 0; i < arrayOfBars.length; i++)
+    console.log(arrayOfBars[i].height);
 }
