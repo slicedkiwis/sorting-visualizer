@@ -1,3 +1,7 @@
+//animation delay function
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 //utility swap function for all algorithms
 async function swap(array, l, r) {
   array[l].color = pivotColor;
@@ -97,9 +101,6 @@ async function merge(left, mid, right) {
     arrayOfBars[left].color = barColor;
     arrayOfBars[left++].height = temp[i];
   }
-}
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 async function bubbleSort() {
   let size = arrayOfBars.length;
